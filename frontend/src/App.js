@@ -1,8 +1,13 @@
-import { useEffect, useState, button } from 'react'
-import Badge from 'react-bootstrap/Badge';
-import Table from 'react-bootstrap/Table';
-import { ListGroup, Card, Button, Form } from "react-bootstrap";
+import { useEffect, useState } from 'react'
 import API from './API';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
+import AddTask from './components/AddTask';
+import Update from './components/Update';
+import Display from './components/Display';
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
 
 function App() {
 
@@ -45,73 +50,30 @@ function App() {
   }
 
 
+
   return (
 
     <>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <h1 style={{ color: '#7550C7' }}>To Do List</h1>
-      </div>
+      <Router>
+        <div className="App">
+        <Navbar bg="light" expand="lg">
+          <Container>
 
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <form onSubmit={onSubmit}>
-          <label>Task Title: </label>
-          <input
-            type='text'
-            required
-            placeholder='Title of Your Task'
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          >
-          </input>
+            <Nav.Link href="/">To Do List</Nav.Link>
+            <Nav.Link href="/addTask">Add New Task</Nav.Link>
+            <Nav.Link href="/update">Update Data</Nav.Link>
 
-          <label>Description of the Task : </label>
-          <input
-            type='text'
-            required
-            placeholder='Describe your Task'
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          >
-          </input>
+          </Container>
 
-          <label>Status: </label>
-          <select required onChange={(e) => setStatus(e.target.value)} value={status}>
-            <option defaultValue={true}>Select one from the List</option>
-            <option value={"Completed"}>Completed</option>
-            <option value={"Not Completed"}>Not Completed</option>
-            <option value={"In Progress"}>In Progress</option>
-          </select>
+        </Navbar>
 
-          <input type='submit' />
-        </form>
-        {message ? <p>{message}</p> : null}
-      </div>
-
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <h2 style={{ color: '#7550C7' }}>Data From API</h2>
-      </div>
-
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        {APIData.length != 0 ?
-          <table style={{ width: '70%', border: '1px', borderColor: 'black', borderStyle: 'double'}}>
-          <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Status</th>
-          </tr>
-          {APIData.map((data) => (
-            <tr key={data.id}>
-              <td>{data.id}</td>
-              <td>{data.title}</td>
-              <td>{data.description}</td>
-              <td>{data.status}</td>
-            </tr>
-          ))}
-        </table> :
-          <p>No Data To Display</p>
-        }
-      </div>
+          <Routes>
+            <Route exact path='/addTask' element={< AddTask />}></Route>
+            <Route exact path='/update' element={< Update />}></Route>
+            <Route exact path='/' element={< Display />}></Route>
+          </Routes>
+        </div>
+      </Router>
 
     </>
 
