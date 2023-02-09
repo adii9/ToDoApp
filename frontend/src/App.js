@@ -12,7 +12,10 @@ import Nav from 'react-bootstrap/Nav';
 function App() {
 
   const [APIData, setAPIData] = useState([])
-
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [status, setStatus] = useState('')
+  const [message, setMessage] = useState('')
 
   useEffect(() => {
     refreshData()
@@ -20,14 +23,31 @@ function App() {
 
   console.log("Api Data -> ", APIData)
 
-  const refreshData = async () => {
-    await API.get('/')
+  const refreshData = () => {
+    API.get('/')
       .then((res) => {
         setAPIData(res.data)
       })
       .catch(console.error)
   }
 
+  const onSubmit = (e) => {
+    e.preventDefault()
+    addToDo(title, description, status)
+  }
+
+
+  const addToDo = (title, description, status) => {
+    let item = { title, description, status }
+    API.post('/', item)
+      .then(() => {
+        setTitle('')
+        setDescription('')
+        setStatus('')
+        refreshData()
+        alert("Data Pushed Successfully")
+      })
+  }
 
 
 
@@ -48,6 +68,7 @@ function App() {
 
           <Routes>
             <Route exact path='/addTask' element={< AddTask />}></Route>
+            <Route exact path='/update' element={< Update />}></Route>
             <Route exact path='/' element={< Display />}></Route>
           </Routes>
         </div>
