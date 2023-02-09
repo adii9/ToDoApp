@@ -36,11 +36,11 @@ function App() {
     <>
       <Router>
         <div className="App">
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="primary" variant="dark">
           <Container>
 
-            <Nav.Link href="/">To Do List</Nav.Link>
-            <Nav.Link href="/addTask">Add New Task</Nav.Link>
+            <Nav.Link href="/" style={{color: 'white'}}>To Do List</Nav.Link>
+            <Nav.Link href="/addTask" style={{color: 'white'}}>Add New Task</Nav.Link>
 
           </Container>
 

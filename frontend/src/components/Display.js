@@ -31,12 +31,20 @@ function Display() {
         navigate('/update', {state: {index: index}})
     }
 
+    const deleteTask = (index) => {
+        API.delete('/' + index + '/')
+            .then(() => {
+                alert("Task Deleted")
+                refreshData()
+            })
+    }
+
 
     return (
         <>
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <h1 style={{ color: '#7550C7' }}>To Do List</h1>
+                <h1 style={{ color: '#3D75E3' }}>To Do List</h1>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
                 {APIData.length != 0 ?
@@ -46,13 +54,14 @@ function Display() {
                                 <Card.Header>
                                     {item.status}
                                 </Card.Header>
-                                <Card.Title>
+                                <Card.Title style={{margin: 10}}>
                                     {item.title}
                                 </Card.Title>
-                                <Card.Text>
+                                <Card.Text style={{margin: 10}}>
                                     {item.description}
                                 </Card.Text>
-                                <Button variant="primary" onClick={() => editTask(item.id)}>Edit Task</Button>
+                                <Button variant="primary" onClick={() => editTask(item.id)} style={{margin: 10}}>Edit Task</Button>
+                                <Button variant="danger" onClick={() => deleteTask(item.id)} style={{margin: 10}}>Delete Task</Button>
                             </Card>
                         ))}
                     </div>
