@@ -6,10 +6,17 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 
 function Update() {
-    const [APIData, setAPIData] = useState([])
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [status, setStatus] = useState('')
+    // const [APIData, setAPIData] = useState([])
+    // const [title, setTitle] = useState('')
+    // const [description, setDescription] = useState('')
+    // const [status, setStatus] = useState('')
+    const initialData = {
+        id: null,
+        title: '',
+        description: '',
+        status: ''
+    }
+    const [currentData, setCurrentData] = useState(initialData)
     const {state} = useLocation();
     const {index} = state
 
@@ -18,43 +25,47 @@ function Update() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        refreshData()
+        fetchData(index)
     }, [])
 
-    const refreshData = () => {
-        API.get('/')
-            .then((res) => {
-                setAPIData(res.data)
-            })
-            .catch(console.error)
+    const handleChange = (e) => {
+        const {name, value} = e.target
+        setCurrentData({...currentData, [name]: value})
     }
+
 
     const onSubmit = (e) => {
         e.preventDefault()
-        addToDo(title, description, status)
+        update(index)
     }
 
-    const addToDo = (title, description, status) => {
-        let item = { title, description, status }
-        API.post('/', item)
+    const update = (id) => {
+        console.log("Status Updated Data -> ", currentData.status)
+        let data = {
+            title: currentData.title,
+            description: currentData.description,
+            status: currentData.status
+        }
+        API.put('/' + id + '/', data)
             .then(() => {
-                setTitle('')
-                setDescription('')
-                setStatus('')
-                refreshData()
                 alert("Data Pushed Successfully")
-                navigate('/', { replace: true });
+                navigate('/');
             })
     }
 
     const fetchData = (id) => {
         API.get('/' + id)
             .then((res) => {
-                console.log("Result for Specific Data -> ", res.data)
+                setCurrentData({
+                    id: res.data.id,
+                    title: res.data.title,
+                    description: res.data.description,
+                    status: res.data.status
+                })
             })
     }
 
-    fetchData(index)
+
 
     return (
         <>
@@ -69,8 +80,9 @@ function Update() {
                         type='text'
                         required
                         placeholder='Title of Your Task'
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        value={currentData.title}
+                        onChange={handleChange}
+                        name='title'
                     >
                     </input>
 
@@ -79,13 +91,14 @@ function Update() {
                         type='text'
                         required
                         placeholder='Describe your Task'
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                        value={currentData.description}
+                        onChange={handleChange}
+                        name='description'
                     >
                     </input>
 
                     <label>Status: </label>
-                    <select required onChange={(e) => setStatus(e.target.value)} value={status}>
+                    <select required value={currentData.status} onChange={handleChange} name='status'>
                         <option defaultValue={true}>Select one from the List</option>
                         <option value={"Completed"}>Completed</option>
                         <option value={"Not Completed"}>Not Completed</option>
