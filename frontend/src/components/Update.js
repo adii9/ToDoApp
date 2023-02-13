@@ -3,6 +3,11 @@ import React from 'react';
 import { useEffect, useState } from 'react'
 import API from '../API';
 import { useNavigate, useLocation } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 
 
 function Update() {
@@ -16,6 +21,7 @@ function Update() {
     const [currentData, setCurrentData] = useState(initialData)
     const {state} = useLocation();
     const {index} = state
+    const dropDownItems = ['In Progress', 'Not Completed', 'Completed', 'Not Started']
 
     console.log("State Value from Route is -> ", index)
 
@@ -70,7 +76,35 @@ function Update() {
                 <h1 style={{ color: '#3D75E3' }}>To Do List</h1>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Form style={{ margin: 20 }} onSubmit={onSubmit}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Task Title</Form.Label>
+                    <Form.Control name='title' type="text" placeholder="Enter Task Title" required value={currentData.title} onChange={handleChange} />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Task Description</Form.Label>
+                    <Form.Control name='description' type="text" placeholder="Describe your Work" required value={currentData.description} onChange={handleChange} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Label>Status</Form.Label>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            {currentData.status}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            {dropDownItems.map((item) => (
+                                <Dropdown.Item onClick={() => setCurrentData({...currentData, status: item})}>{item}</Dropdown.Item>
+                            ))}
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
+
+            {/* <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <form onSubmit={onSubmit}>
                     <label>Task Title: </label>
                     <input
@@ -104,7 +138,7 @@ function Update() {
 
                     <input type='submit' />
                 </form>
-            </div>
+            </div> */}
         </>
     )
 }
