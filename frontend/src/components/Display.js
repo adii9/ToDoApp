@@ -73,20 +73,3 @@ function Display() {
 
 export default Display;
 
-
-// <table style={{ width: '70%', border: '1px', borderColor: 'black', borderStyle: 'double' }}>
-                    //     <tr>
-                    //         <th>Id</th>
-                    //         <th>Title</th>
-                    //         <th>Description</th>
-                    //         <th>Status</th>
-                    //     </tr>
-                    //     {APIData.map((data) => (
-                    //         <tr key={data.id}>
-                    //             <td>{data.id}</td>
-                    //             <td>{data.title}</td>
-                    //             <td>{data.description}</td>
-                    //             <td>{data.status}</td>
-                    //         </tr>
-                    //     ))}
-                    // </table>

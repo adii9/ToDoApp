@@ -15,7 +15,7 @@ function App() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [status, setStatus] = useState('')
-  const [message, setMessage] = useState('')
+
 
   useEffect(() => {
     refreshData()
@@ -31,10 +31,6 @@ function App() {
       .catch(console.error)
   }
 
-  const onSubmit = (e) => {
-    e.preventDefault()
-    addToDo(title, description, status)
-  }
 
 
   const addToDo = (title, description, status) => {

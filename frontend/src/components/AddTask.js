@@ -5,8 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+
 
 function About() {
     const [APIData, setAPIData] = useState([])
@@ -83,39 +82,7 @@ function About() {
                 </Button>
             </Form>
 
-            {/* <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <form onSubmit={onSubmit}>
-                    <label>Task Title: </label>
-                    <input
-                        type='text'
-                        required
-                        placeholder='Title of Your Task'
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                    >
-                    </input>
 
-                    <label>Description of the Task : </label>
-                    <input
-                        type='text'
-                        required
-                        placeholder='Describe your Task'
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    >
-                    </input>
-
-                    <label>Status: </label>
-                    <select required onChange={(e) => setStatus(e.target.value)} value={status}>
-                        <option defaultValue={true}>Select one from the List</option>
-                        <option value={"Completed"}>Completed</option>
-                        <option value={"Not Completed"}>Not Completed</option>
-                        <option value={"In Progress"}>In Progress</option>
-                    </select>
-
-                    <input type='submit' />
-                </form>
-            </div> */}
         </>
     )
 }

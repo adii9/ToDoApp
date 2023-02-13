@@ -6,8 +6,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+
 
 
 function Update() {
@@ -104,41 +103,7 @@ function Update() {
                 </Button>
             </Form>
 
-            {/* <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <form onSubmit={onSubmit}>
-                    <label>Task Title: </label>
-                    <input
-                        type='text'
-                        required
-                        placeholder='Title of Your Task'
-                        value={currentData.title}
-                        onChange={handleChange}
-                        name='title'
-                    >
-                    </input>
 
-                    <label>Description of the Task : </label>
-                    <input
-                        type='text'
-                        required
-                        placeholder='Describe your Task'
-                        value={currentData.description}
-                        onChange={handleChange}
-                        name='description'
-                    >
-                    </input>
-
-                    <label>Status: </label>
-                    <select required value={currentData.status} onChange={handleChange} name='status'>
-                        <option defaultValue={true}>Select one from the List</option>
-                        <option value={"Completed"}>Completed</option>
-                        <option value={"Not Completed"}>Not Completed</option>
-                        <option value={"In Progress"}>In Progress</option>
-                    </select>
-
-                    <input type='submit' />
-                </form>
-            </div> */}
         </>
     )
 }
