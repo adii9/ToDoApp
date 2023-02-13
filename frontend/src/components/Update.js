@@ -6,10 +6,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 
 function Update() {
-    // const [APIData, setAPIData] = useState([])
-    // const [title, setTitle] = useState('')
-    // const [description, setDescription] = useState('')
-    // const [status, setStatus] = useState('')
+
     const initialData = {
         id: null,
         title: '',

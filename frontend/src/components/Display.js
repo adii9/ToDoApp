@@ -7,10 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 function Display() {
     const [APIData, setAPIData] = useState([])
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [status, setStatus] = useState('')
-    const [message, setMessage] = useState('')
 
     const navigate = useNavigate()
 
